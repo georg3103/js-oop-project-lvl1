@@ -4,13 +4,13 @@ import getDataType from '../utils/getDataType';
 import Schema from './schema';
 
 const validations = {
-  checkType: (type) => (data) => type === getDataType(data),
+  checkType: (type) => (data) => getDataType(type, data),
   min: (num) => (data) => data > num,
   max: (num) => (data) => data < num,
   range: (minNum, maxNum) => (data) =>
     validations.min(minNum)(data) && validations.max(maxNum)(data),
   positive: () => (data) => data > 0,
-  required: () => (data) => validations.checkType('number')(data),
+  required: (type) => (data) => validations.checkType(type)(data),
 };
 
 export default class NumberSchema extends Schema {
@@ -19,7 +19,7 @@ export default class NumberSchema extends Schema {
   }
 
   required() {
-    this.checks.push(validations.required());
+    this.checks.push(validations.required(this.type));
     return this;
   }
 

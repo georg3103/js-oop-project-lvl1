@@ -1,5 +1,3 @@
-import getDataType from '../utils/getDataType';
-
 import Schema from './schema';
 
 const validations = {
@@ -11,11 +9,6 @@ const validations = {
 export default class StringSchema extends Schema {
   constructor() {
     super({ type: 'string' });
-  }
-
-  isValid(data) {
-    return this.checks
-      .reduce((acc, check) => (!acc ? acc : check(data)), true);
   }
 
   required() {

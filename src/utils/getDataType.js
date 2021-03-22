@@ -1,9 +1,7 @@
 const typesMapper = {
-  string: 'string',
-  number: 'number',
+  string: (data) => typeof data === 'string',
+  number: (data) => typeof data === 'number',
+  array: (data) => Array.isArray(data),
 };
 
-export default (data) => {
-  const type = typeof data;
-  return typesMapper[type];
-};
+export default (type, data) => typesMapper[type](data);

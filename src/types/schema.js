@@ -2,7 +2,7 @@
 import getDataType from '../utils/getDataType';
 
 const validations = {
-  checkType: (type) => (data) => type === getDataType(data),
+  checkType: (type) => (data) => getDataType(type, data),
 };
 
 export default class Schema {
