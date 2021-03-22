@@ -1,6 +1,8 @@
 /* eslint-disable implicit-arrow-linebreak */
 import getDataType from '../utils/getDataType';
 
+import Schema from './schema';
+
 const validations = {
   checkType: (type) => (data) => type === getDataType(data),
   min: (num) => (data) => data > num,
@@ -11,15 +13,9 @@ const validations = {
   required: () => (data) => validations.checkType('number')(data),
 };
 
-export default class NumberSchema {
+export default class NumberSchema extends Schema {
   constructor() {
-    this.type = 'number';
-    this.checks = [validations.checkType(this.type)];
-  }
-
-  isValid(data) {
-    return this.checks
-      .reduce((acc, check) => (!acc ? acc : check(data)), true);
+    super({ type: 'number' });
   }
 
   required() {

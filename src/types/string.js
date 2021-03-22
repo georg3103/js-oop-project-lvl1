@@ -1,16 +1,16 @@
 import getDataType from '../utils/getDataType';
 
+import Schema from './schema';
+
 const validations = {
-  checkType: (type) => (data) => type === getDataType(data),
   minLength: (length) => (data) => data.length >= length,
   contains: (str) => (data) => data.includes(str),
   required: () => (data) => !!data.length,
 };
 
-export default class StringSchema {
+export default class StringSchema extends Schema {
   constructor() {
-    this.type = 'string';
-    this.checks = [validations.checkType(this.type)];
+    super({ type: 'string' });
   }
 
   isValid(data) {
