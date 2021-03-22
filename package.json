@@ -2,10 +2,13 @@
   "name": "@hexlet/code",
   "version": "0.0.0",
   "description": "validator",
+  "bin": {
+    "validator": "bin/validator.js"
+  },
   "scripts": {
     "build": "NODE_ENV=production babel src --out-dir dist --source-maps inline",
     "prepublishOnly": "npm run build",
-    "test": "jest",
+    "test": "npx jest",
     "release": "standard-version"
   },
   "files": [
@@ -24,7 +27,6 @@
     "testEnvironment": "node"
   },
   "homepage": "https://github.com/georg3103/js-oop-project-lvl1#readme",
-  "dependencies": {},
   "devDependencies": {
     "standard-version": "^9.1.0",
     "@babel/cli": "^7.4.3",
@@ -40,5 +42,8 @@
     "eslint-plugin-jest": "^23.18.0",
     "jest": "^26.1.0",
     "jest-cli": "^26.1.0"
+  },
+  "dependencies": {
+    "@babel/plugin-proposal-class-properties": "^7.13.0"
   }
 }

@@ -1,8 +1,7 @@
 install: install-deps
 
-build:
-	rm -rf dist
-	npm run build
+run:
+	bin/nodejs-package.js 10
 
 install-deps:
 	npm ci
@@ -13,20 +12,16 @@ test:
 test-coverage:
 	npm test -- --coverage --coverageProvider=v8
 
-test-watch:
-	npm test -- --watchAll
-
 lint:
 	npx eslint .
 
-lint-fix:
-	npx eslint --fix .
+publish:
+	npm publish
+
+.PHONY: test
 
 prePublish:
 	npm release -- --release-as patch
 	git push --follow-tags origin dev
-
-publish:
-	npm publish
 
 .PHONY: test

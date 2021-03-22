@@ -1,4 +1,4 @@
-import { getDataType } from '../utils';
+import getDataType from '../utils/getDataType';
 
 const validations = {
   checkType: (type) => (data) => type === getDataType(data),
