@@ -1,8 +1,8 @@
 import {
-  test, expect, describe, beforeEach
+  test, expect, describe, beforeEach,
 } from '@jest/globals';
 
-import Validator from '../src/validator';
+import Validator from '../src/index';
 
 describe('array functionality', () => {
   let schema;

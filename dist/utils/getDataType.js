@@ -1,0 +1,16 @@
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.default = void 0;
+const typesMapper = {
+  string: data => typeof data === 'string',
+  number: data => typeof data === 'number',
+  array: data => Array.isArray(data)
+};
+
+var _default = (type, data) => typesMapper[type](data);
+
+exports.default = _default;
+//# sourceMappingURL=data:application/json;charset=utf-8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbIi4uLy4uL3NyYy91dGlscy9nZXREYXRhVHlwZS5qcyJdLCJuYW1lcyI6WyJ0eXBlc01hcHBlciIsInN0cmluZyIsImRhdGEiLCJudW1iZXIiLCJhcnJheSIsIkFycmF5IiwiaXNBcnJheSIsInR5cGUiXSwibWFwcGluZ3MiOiI7Ozs7OztBQUFBLE1BQU1BLFdBQVcsR0FBRztBQUNsQkMsRUFBQUEsTUFBTSxFQUFHQyxJQUFELElBQVUsT0FBT0EsSUFBUCxLQUFnQixRQURoQjtBQUVsQkMsRUFBQUEsTUFBTSxFQUFHRCxJQUFELElBQVUsT0FBT0EsSUFBUCxLQUFnQixRQUZoQjtBQUdsQkUsRUFBQUEsS0FBSyxFQUFHRixJQUFELElBQVVHLEtBQUssQ0FBQ0MsT0FBTixDQUFjSixJQUFkO0FBSEMsQ0FBcEI7O2VBTWUsQ0FBQ0ssSUFBRCxFQUFPTCxJQUFQLEtBQWdCRixXQUFXLENBQUNPLElBQUQsQ0FBWCxDQUFrQkwsSUFBbEIsQyIsInNvdXJjZXNDb250ZW50IjpbImNvbnN0IHR5cGVzTWFwcGVyID0ge1xuICBzdHJpbmc6IChkYXRhKSA9PiB0eXBlb2YgZGF0YSA9PT0gJ3N0cmluZycsXG4gIG51bWJlcjogKGRhdGEpID0+IHR5cGVvZiBkYXRhID09PSAnbnVtYmVyJyxcbiAgYXJyYXk6IChkYXRhKSA9PiBBcnJheS5pc0FycmF5KGRhdGEpLFxufTtcblxuZXhwb3J0IGRlZmF1bHQgKHR5cGUsIGRhdGEpID0+IHR5cGVzTWFwcGVyW3R5cGVdKGRhdGEpO1xuIl19

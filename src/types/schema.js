@@ -1,18 +1,32 @@
-/* eslint-disable implicit-arrow-linebreak */
 import getDataType from '../utils/getDataType';
 
-const validations = {
+export const schemaValidators = {
   checkType: (type) => (data) => getDataType(type, data),
 };
 
 export default class Schema {
-  constructor({ type }) {
+  constructor({ type, validators }) {
     this.type = type;
-    this.checks = [validations.checkType(this.type)];
+    this.validators = validators;
+    this.checks = [];
+    this.#checkType();
+  }
+
+  #addValidator(validator) {
+    this.checks.push(validator);
+  }
+
+  #checkType() {
+    this.#addValidator(schemaValidators.checkType(this.type));
+    return this;
   }
 
   isValid(data) {
-    return this.checks
-      .reduce((acc, check) => (!acc ? acc : check(data)), true);
+    return this.checks.every((check) => check(data));
+  }
+
+  required() {
+    this.#addValidator(this.validators.required(this.type));
+    return this;
   }
 }

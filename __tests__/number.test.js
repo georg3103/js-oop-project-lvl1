@@ -1,13 +1,16 @@
 import {
-  test, expect, describe,
+  test, expect, describe, beforeEach,
 } from '@jest/globals';
 
-import Validator from '../src/validator';
+import Validator from '../src/index';
 
 describe('number functionality', () => {
-  const v = new Validator();
+  let schema;
 
-  const schema = v.number();
+  beforeEach(() => {
+    const v = new Validator();
+    schema = v.number();
+  });
 
   test('isValid', () => {
     expect(schema.isValid(2)).toBe(true);
