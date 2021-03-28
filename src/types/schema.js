@@ -1,7 +1,7 @@
 import getDataType from '../utils/getDataType';
 
 export const schemaValidators = {
-  checkType: (type) => (data) => getDataType(type, data),
+  checkType: (type) => (data) => getDataType(type, data) || data == null,
 };
 
 export default class Schema {
