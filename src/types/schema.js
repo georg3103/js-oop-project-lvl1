@@ -12,12 +12,12 @@ export default class Schema {
     this.#checkType();
   }
 
-  #addValidator(validator) {
-    this.checks.push(validator);
+  #addCheck(check) {
+    this.checks.push(check);
   }
 
   #checkType() {
-    this.#addValidator(schemaValidators.checkType(this.type));
+    this.#addCheck(schemaValidators.checkType(this.type));
     return this;
   }
 
@@ -26,7 +26,7 @@ export default class Schema {
   }
 
   required() {
-    this.#addValidator(this.validators.required(this.type));
+    this.#addCheck(this.validators.required(this.type));
     return this;
   }
 }
