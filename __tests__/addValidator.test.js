@@ -24,11 +24,7 @@ describe('addValidator', () => {
 
   test('number (min)', () => {
     const fn = (value, min) => value >= min;
-    v.addValidator('number', 'min', fn);
-
-    const schema = v.number().min(5);
-
-    expect(schema.isValid(4)).toBe(false);
-    expect(schema.isValid(5)).toBe(true);
+    expect(() => v.addValidator('number', 'min', fn))
+      .toThrow('Validator of name min already exists');
   });
 });

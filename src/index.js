@@ -1,9 +1,38 @@
 import capitalize from './utils/capitalize';
 
-import StringSchema, { stringValidators } from './types/string';
-import NumberSchema, { numberValidators } from './types/number';
-import ArraySchema, { arrayValidators } from './types/array';
-import ObjectSchema, { objectValidators } from './types/object';
+import StringSchema from './types/string';
+import NumberSchema from './types/number';
+import ArraySchema from './types/array';
+import ObjectSchema from './types/object';
+
+import { schemaValidators } from './types/schema';
+
+const stringValidators = {
+  minLength: (length) => (data) => data.length >= length,
+  contains: (str) => (data) => data.includes(str),
+  required: () => (data) => !!data.length,
+};
+
+const numberValidators = {
+  min: (num) => (data) => data > num,
+  max: (num) => (data) => data < num,
+  range: (minNum, maxNum) => (data) => numberValidators.min(minNum)(data)
+    && numberValidators.max(maxNum)(data),
+  positive: () => (data) => data > 0,
+  required: (type) => (data) => schemaValidators.checkType(type)(data),
+};
+
+const arrayValidators = {
+  sizeof: (size) => (data) => data.length === size,
+  required: () => (data) => Array.isArray(data),
+};
+
+const objectValidators = {
+  shape: (shapeObj) => (data) => Object.entries(shapeObj).every(([key, schema]) => {
+    const dataValue = data[key];
+    return schema.isValid(dataValue);
+  }),
+};
 
 export default class Validator {
   constructor() {
@@ -37,7 +66,7 @@ export default class Validator {
     return new this.types.Object({ type: 'object', validators: this.validators.object });
   }
 
-  #addMethod(type, name) {
+  addMethod(type, name) {
     function newMethod(...args) {
       this.checks.push(this.validators[name](...args));
       return this;
@@ -46,9 +75,13 @@ export default class Validator {
   }
 
   addValidator(type, name, fn) {
+    if (this.validators[type][name]) {
+      throw new Error(`Validator of name ${name} already exists`);
+    }
+
     const newValidator = (value) => (data) => fn(data, value);
     this.validators[type][name] = newValidator;
-    this.#addMethod(type, name);
+    this.addMethod(type, name);
     return true;
   }
 }

@@ -1,13 +1,4 @@
-import Schema, { schemaValidators } from './schema';
-
-export const numberValidators = {
-  min: (num) => (data) => data > num,
-  max: (num) => (data) => data < num,
-  range: (minNum, maxNum) => (data) => numberValidators.min(minNum)(data)
-    && numberValidators.max(maxNum)(data),
-  positive: () => (data) => data > 0,
-  required: (type) => (data) => schemaValidators.checkType(type)(data),
-};
+import Schema from './schema';
 
 export default class NumberSchema extends Schema {
   positive(num) {

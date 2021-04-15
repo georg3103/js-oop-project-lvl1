@@ -9,24 +9,30 @@ export default class Schema {
     this.type = type;
     this.validators = validators;
     this.checks = [];
-    this.#checkType();
+    this.checkType();
   }
 
-  #addCheck(check) {
+  addCheck(check) {
     this.checks.push(check);
   }
 
-  #checkType() {
-    this.#addCheck(schemaValidators.checkType(this.type));
+  checkType() {
+    this.addCheck(schemaValidators.checkType(this.type));
     return this;
   }
 
   isValid(data) {
+    console.warn(data, this.isRequired);
+    if (!this.isRequired) {
+      const isPresent = data == null;
+      if (!isPresent) return true;
+    }
     return this.checks.every((check) => check(data));
   }
 
   required() {
-    this.#addCheck(this.validators.required(this.type));
+    this.addCheck(this.validators.required(this.type));
+    this.isRequired = true;
     return this;
   }
 }
